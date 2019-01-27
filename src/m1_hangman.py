@@ -27,34 +27,63 @@ def guess():
     guess1 = str(g)
     return guess1
 
-def check(guess,answer, output):
+def check(guess,answer, output,life):
+    correct = False
     for k in range(len(answer)):
         if answer[k] == guess:
             index = k
             output[index] = answer[index]
+            correct = True
+            print('Your guess ' + str(guess) + ' is in the word!')
+    if correct is False:
+        life = int(life) - 1
+    return life
 
 
+def won(answer,dash,life):
+    if int(life) > 0:
+        if answer == dash:
+            return True
+        else:
+            return False
+def lost(life):
+    if int(life) <= 0:
+        return True
+    else:
+        return False
 
-
-
-
-
-
-
+def playagain():
+    play = input("Type YES if you would like to play again.  Type anything else if you would like to stop playing.")
+    print("")
+    if play == "YES":
+        main()
+    else:
+        print("Goodbye!")
 
 
 def main():
     answer = randomword()
-    print(answer)
+    life = int(input("Enter the number of wrong guesses you would like to allow yourself: "))
     output = ['-']*(len(answer))
-    guess1 = guess()
-    check(guess1,answer, output)
-    dash =''
-    for k in range(len(output)):
-        dash = dash + output[k]
-    print(dash)
+    while True:
+        guess1 = guess()
+        life = check(guess1,answer, output,life)
+        dash =''
+        for k in range(len(output)):
+            dash = dash + output[k]
+        print(dash)
+        win_result = won(answer,dash,life)
+        lost_result = lost(life)
+        if win_result == True:
+            print("Congratulations, you won!")
+            break
+        if lost_result == True:
+            print("I'm sorry, you lost.")
+            break
+        print("You have " + str(life) + " lives remaining.")
+        print("")
+    playagain()
 main()
-
 
 
 

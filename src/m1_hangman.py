@@ -4,7 +4,7 @@ Hangman.
 Authors: Joseph Law and Daniel Su.
 """  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
-# TODO: 2. Implement Hangman using your Iterative Enhancement Plan.
+# DONE: 2. Implement Hangman using your Iterative Enhancement Plan.
 import random
 def dictionary():
     with open('words.txt') as f:
